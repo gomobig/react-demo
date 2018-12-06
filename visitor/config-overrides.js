@@ -6,6 +6,10 @@ module.exports = function override(config, env) {
     ["import", { libraryName: "antd-mobile", style: true, libraryDirectory: "es" }],
     config,
   );
-  config = rewireLess(config, env);
+  config = rewireLess.withLoaderOptions({
+    modifyVars: { "@primary-color": "#108EE9" },
+    javascriptEnabled: true,
+  })(config, env);
+  // config = rewireLess(config, env);
   return config;
 };

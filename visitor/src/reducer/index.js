@@ -1,27 +1,29 @@
-const START_UPLOAD = 0;
+const SAVE_IMAGE_TOKEN = 0;
+const CLEAR_IMAGE_TOKEN = 1;
+
 
 const reducer = (state, action) => {
   if (!state) {
     state = {
-      imagePicker: {
-        loading: false,
-        uploadStatus: 0,
-        imageTocke: null,
-        text: '开始拍摄',
-      }
+      imageToken: '',
+      id: '',
+      visitorName: '',
     }
   }
   switch (action.type) {
-    case START_UPLOAD:
-      return { ...state, imagePicker: {...state.imagePicker, loading: true, text: '上传中'} };
+    case SAVE_IMAGE_TOKEN:
+      return { ...state, imageToken: action.payload };
+    case CLEAR_IMAGE_TOKEN:
+      return { ...state, imageToken: ''};
     default:
       return state;
   }
-}
+};
 
-const startUpload = () => ({type: START_UPLOAD});
-
+const saveVisitorInfo = visitor => ({type: SAVE_IMAGE_TOKEN, payload: visitor});
+const clearImageToken = () => ({type: CLEAR_IMAGE_TOKEN});
 export default reducer;
 export {
-  startUpload,
+  saveVisitorInfo,
+  clearImageToken,
 }
